@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: data-pipeline-cron
+  labels:
+    app: data-pipeline
+spec:
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: data-pipeline-cron
+              image: jeffreylean/data-pipeline
+              args:
+                - /bin/sh
+                - -c
+                - "curl --fail -X POST data-pipeline/v1/transfer"
+          restartPolicy: Never
+      backoffLimit: 5

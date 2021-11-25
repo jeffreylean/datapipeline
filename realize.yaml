@@ -1,0 +1,53 @@
+settings:
+  files:
+    outputs:
+      status: false
+      path: ""
+      name: .r.outputs.log
+    logs:
+      status: false
+      path: ""
+      name: .r.logs.log
+    errors:
+      status: false
+      path: ""
+      name: .r.errors.log
+  legacy:
+    force: true
+    interval: 0ms
+schema:
+  - name: accessment
+    path: .
+
+    env:
+      MYSQL_USERNAME: "dev"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "air-asia"
+      MYSQL_HOST: "127.0.0.1"
+      MYSQL_PORT: "3406"
+
+      SFTP_USER: "RM8005-jeffrey"
+      SFTP_PASS: "4080"
+      SFTP_HOST: "192.168.0.198"
+
+      MAILJET_KEY: "42b6094a466608288b8ba50b32509da6"
+      MAILJET_SECRET: "bccdaa44b4a44acb59b1c5e36e85aaa4"
+
+      EMAIL: "leanwf1117@gmail.com"
+
+      REDISHOST: "localhost:6379"
+    commands:
+      install:
+        status: true
+        method: go install
+      run:
+        status: true
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+      ignored_paths:
+        - .git
+        - .realize
+        - vendor
